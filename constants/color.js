@@ -10,4 +10,5 @@ export const Colors = {
   primary402: "#D3756B",
   primary403: "#F0997D",
   primary404: "#FFC3A1",
+  secondary100: "lightgrey",
 };

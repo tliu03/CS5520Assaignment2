@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import EntryButton from "../UI/EntryButton";
+import EntryButton from "../UI/Button";
 import IconButton from "../UI/IconButton";
 import { useState } from "react";
 

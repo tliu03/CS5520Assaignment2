@@ -7,20 +7,29 @@ import AllEntries from "./screens/AllEntries";
 import OverLimitEntries from "./screens/OverLimitEntries";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Colors } from "./constants/color";
+import AddEntry from "./screens/AddEntry";
 
-function EntryContainer() {
+function EntryOverview() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerTintColor: Colors.primary300,
         headerStyle: { backgroundColor: Colors.primary100 },
         tabBarStyle: { backgroundColor: Colors.primary100 },
         tabBarActiveTintColor: Colors.primary300,
+        tabBarInactiveTintColor: Colors.secondary100,
         headerRight: ({ tintColor }) => (
-          <SimpleLineIcons name="plus" size={22} color={tintColor} />
+          <SimpleLineIcons
+            name="plus"
+            size={22}
+            color={tintColor}
+            onPress={() => {
+              navigation.navigate("AddEntry");
+            }}
+          />
         ),
-      }}
+      })}
     >
       <Tab.Screen
         name="All Entry"
@@ -56,9 +65,10 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Entries"
-          component={EntryContainer}
+          component={EntryOverview}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="AddEntry" component={AddEntry} />
         {/* <Stack.Screen name="" /> */}
       </Stack.Navigator>
     </NavigationContainer>
