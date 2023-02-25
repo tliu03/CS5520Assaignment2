@@ -62,7 +62,12 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: Colors.primary100 },
+          headerTintColor: Colors.primary300,
+        }}
+      >
         <Stack.Screen
           name="Entries"
           component={EntryOverview}

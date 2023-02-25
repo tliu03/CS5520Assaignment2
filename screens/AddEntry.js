@@ -3,5 +3,8 @@ import React from "react";
 import EntryForm from "../components/ManageEntry/EntryForm";
 
 export default function AddEntry() {
-  return <EntryForm />;
+  function SubmitEntry() {
+    console.log("submit");
+  }
+  return <EntryForm onSubmit={SubmitEntry} />;
 }
