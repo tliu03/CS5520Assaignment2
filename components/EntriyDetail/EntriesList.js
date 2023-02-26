@@ -6,7 +6,9 @@ export default function EntriesList({ entries }) {
   if (!entries || entries.length === 0) {
     return (
       <View style={styles.listContainer}>
-        <Text>There's no entry at the moment, please add one!</Text>
+        <Text style={styles.textMessage}>
+          There's no entry at the moment, please add one!
+        </Text>
       </View>
     );
   } else {
@@ -25,5 +27,9 @@ export default function EntriesList({ entries }) {
 const styles = StyleSheet.create({
   listContainer: {
     marginTop: 40,
+  },
+  textMessage: {
+    size: 18,
+    marginHorizontal: 20,
   },
 });
