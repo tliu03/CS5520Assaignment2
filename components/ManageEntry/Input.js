@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     padding: 6,
     fontSize: 16,
     textAlignVertical: "top",
-    // alignItems: "flex-start",
   },
   inputMultiline: {
     minHeight: 200,

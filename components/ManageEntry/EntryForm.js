@@ -62,7 +62,9 @@ export default function EntryForm({ onSubmit }) {
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <Button style={styles.button} onPress={resetForm}>Reset</Button>
+        <Button style={styles.button} onPress={resetForm}>
+          Reset
+        </Button>
         <Button style={styles.button} onPress={submitHandler}>
           Submit
         </Button>
@@ -93,12 +95,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    backgroundColor: Colors.primary100,
     width: "30%",
-    padding: 10,
-    marginHorizontal: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
   },
 });
