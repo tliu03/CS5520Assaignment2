@@ -8,6 +8,7 @@ import OverLimitEntries from "./screens/OverLimitEntries";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Colors } from "./constants/color";
 import AddEntry from "./screens/AddEntry";
+import EditEntry from "./screens/EditEntry";
 
 function EntryOverview() {
   const Tab = createBottomTabNavigator();
@@ -74,7 +75,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="AddEntry" component={AddEntry} />
-        {/* <Stack.Screen name="" /> */}
+        <Stack.Screen name="EditEntry" component={EditEntry} />
       </Stack.Navigator>
     </NavigationContainer>
   );

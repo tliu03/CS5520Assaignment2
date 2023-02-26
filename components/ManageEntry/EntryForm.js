@@ -2,13 +2,13 @@ import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import Button from "../UI/Button";
 import { Colors } from "../../constants/color";
-import Card from "../UI/Card";
 import Input from "./Input";
 
 export default function EntryForm({ onSubmit }) {
   const [entry, setEntry] = useState({
     calorie: 0,
     description: "",
+    reviewed: false,
   });
 
   function entryInputHandler(inputIdentifier, enteredValue) {
@@ -39,6 +39,7 @@ export default function EntryForm({ onSubmit }) {
     setEntry({
       calorie: 0,
       description: "",
+      reviewed: false,
     });
   }
   return (

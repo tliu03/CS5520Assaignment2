@@ -1,24 +1,22 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import Button from "../UI/Button";
-import IconButton from "../UI/IconButton";
-import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Colors } from "../../constants/color";
 import Card from "../UI/Card";
 
 export default function EntryItem({ entry }) {
+  const navigation = useNavigation();
   return (
-    <Pressable>
+    <Pressable onPress={navigation.navigate("EditEntry")}>
       <Card style={styles.entryContainer}>
         <Text style={styles.text}>{entry.description}</Text>
         <View style={styles.calorieDisplayContainer}>
-          {entry.calorie > 500 && (
-            <IconButton
-              icon="warning"
+          {!entry.reviewed && (
+            <Ionicons
+              name="warning"
               size={18}
               color="yellow"
-              onPress={() => {
-                console.log("pressedIcon");
-              }}
+              style={styles.IconStyle}
             />
           )}
           <Card style={styles.number}>
@@ -40,6 +38,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: Colors.primary401,
+  },
+  IconStyle: {
+    paddingHorizontal: 10,
+    marginVertical: 2,
   },
   calorieDisplayContainer: {
     flexDirection: "row",
