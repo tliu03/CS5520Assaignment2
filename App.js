@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -11,6 +12,7 @@ import AddEntry from "./screens/AddEntry";
 import EditEntry from "./screens/EditEntry";
 
 import { firestore } from "./Firebase/firebase-setup";
+import { onSnapshot, collection } from "firebase/firestore";
 
 function EntryOverview() {
   const Tab = createBottomTabNavigator();
@@ -63,6 +65,29 @@ function EntryOverview() {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [entries, setEntries] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(firestore, "entries"),
+      (querySnapshot) => {
+        if (querySnapshot.empty) {
+          setEntries([]);
+        } else {
+          let docs = [];
+          querySnapshot.docs.forEach((snap) => {
+            console.log(snap.id);
+            return docs.push({ ...snap.data(), id: snap.id });
+          });
+          console.log(docs);
+          setEntries(docs);
+        }
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator

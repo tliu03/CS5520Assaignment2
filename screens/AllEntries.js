@@ -1,12 +1,14 @@
 import { View, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
 import EntriesList from "../components/EntriyDetail/EntriesList";
 import { Colors } from "../constants/color";
-import { SAMPLE_DATA } from "../constants/sampledata";
 
-export default function AllEntries() {
+
+export default function AllEntries({entries}) {
+ 
   return (
     <View style={styles.container}>
-      <EntriesList entries={SAMPLE_DATA} />
+      <EntriesList entries={entries} />
     </View>
   );
 }
