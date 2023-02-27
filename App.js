@@ -10,6 +10,8 @@ import { Colors } from "./constants/color";
 import AddEntry from "./screens/AddEntry";
 import EditEntry from "./screens/EditEntry";
 
+import { firestore } from "./Firebase/firebase-setup";
+
 function EntryOverview() {
   const Tab = createBottomTabNavigator();
   return (
