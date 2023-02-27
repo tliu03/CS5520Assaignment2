@@ -11,9 +11,6 @@ import { Colors } from "./constants/color";
 import AddEntry from "./screens/AddEntry";
 import EditEntry from "./screens/EditEntry";
 
-import { firestore } from "./Firebase/firebase-setup";
-import { onSnapshot, collection } from "firebase/firestore";
-
 function EntryOverview() {
   const Tab = createBottomTabNavigator();
   return (
@@ -65,29 +62,6 @@ function EntryOverview() {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [entries, setEntries] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(firestore, "entries"),
-      (querySnapshot) => {
-        if (querySnapshot.empty) {
-          setEntries([]);
-        } else {
-          let docs = [];
-          querySnapshot.docs.forEach((snap) => {
-            console.log(snap.id);
-            return docs.push({ ...snap.data(), id: snap.id });
-          });
-          console.log(docs);
-          setEntries(docs);
-        }
-      }
-    );
-    return () => {
-      unsubscribe();
-    };
-  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator

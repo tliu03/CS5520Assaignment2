@@ -2,7 +2,34 @@ import { View, StyleSheet } from "react-native";
 import { Colors } from "../constants/color";
 import EntriesList from "../components/EntriyDetail/EntriesList";
 
-export default function OverLimitEntries({ entries }) {
+import { firestore } from "../Firebase/firebase-setup";
+import { onSnapshot, collection } from "firebase/firestore";
+import { useState, useEffect } from "react";
+
+export default function OverLimitEntries() {
+  const [entries, setEntries] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(firestore, "entries"),
+      (querySnapshot) => {
+        if (querySnapshot.empty) {
+          setEntries([]);
+        } else {
+          let docs = [];
+          querySnapshot.docs.forEach((snap) => {
+            console.log(snap.id);
+            return docs.push({ ...snap.data(), id: snap.id });
+          });
+          console.log(docs);
+          setEntries(docs);
+        }
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   const OverLimitEntry = entries.filter(
     (entry) => entry.calorie > 500 && !entry.reviewed
   );

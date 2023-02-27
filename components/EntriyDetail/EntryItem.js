@@ -6,8 +6,12 @@ import Card from "../UI/Card";
 
 export default function EntryItem({ entry }) {
   const navigation = useNavigation();
+  
+  function EditEntryNav(){
+    navigation.navigate('EditEntry', {entry: entry})
+  }
   return (
-    <Pressable onPress={navigation.navigate("EditEntry")}>
+    <Pressable onPress={EditEntryNav}>
       <Card style={styles.entryContainer}>
         <Text style={styles.text}>{entry.description}</Text>
         <View style={styles.calorieDisplayContainer}>
