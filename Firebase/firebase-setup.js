@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import React from "react";
+import { getFirestore } from "firebase/firestore";
 import {
   apiKey,
   authDomain,
