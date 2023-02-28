@@ -3,12 +3,16 @@ import React from "react";
 import Card from "../UI/Card";
 import { Colors } from "../../constants/color";
 import IconButton from "../UI/IconButton";
-import { writeToDB } from "../../Firebase/firestoreHelper";
+import { updateFromDB } from "../../Firebase/firestoreHelper";
+import { useNavigation } from "@react-navigation/native";
 
 export default function EntryDetail({ entry }) {
+  const navigation = useNavigation();
   function reviewButtonHandler() {
     // update data
-    console.log(entry);
+    updateFromDB(entry.id, { reviewed: true });
+    // console.log(entry.reviewed);
+    navigation.navigate("All Entry");
   }
   return (
     <Card style={styles.CardContainer}>

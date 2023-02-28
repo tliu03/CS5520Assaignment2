@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: "space-between",
     alignItems: "center",
-    borderRadius: 4,
+    borderRadius: 6,
     backgroundColor: Colors.primary401,
   },
   pressed: {
     opacity: 0.75,
     backgroundColor: Colors.primary401,
-    borderRadius: 4,
+    borderRadius: 6,
   },
   IconStyle: {
     paddingHorizontal: 10,

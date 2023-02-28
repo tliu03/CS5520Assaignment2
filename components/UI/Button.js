@@ -6,9 +6,10 @@ function Button({ children, onPress, style }) {
     <View style={style}>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => pressed && styles.pressed}
+        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        android_ripple={true}
       >
-        <View style={styles.button}>
+        <View>
           <Text style={styles.buttonText}>{children}</Text>
         </View>
       </Pressable>
@@ -32,6 +33,6 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.5,
     backgroundColor: Colors.primary400,
-    borderRadius: 4,
+    borderRadius: 5,
   },
 });

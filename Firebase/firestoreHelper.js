@@ -1,10 +1,16 @@
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { firestore } from "./firebase-setup";
 
 export async function writeToDB(entry) {
   try {
     const docRef = await addDoc(collection(firestore, "entries"), entry);
-    console.log(docRef.id);
+    // console.log(docRef.id);
   } catch (err) {
     console.log(err);
   }
@@ -13,6 +19,15 @@ export async function writeToDB(entry) {
 export async function deleteFromDB(id) {
   try {
     await deleteDoc(doc(firestore, "entries", id));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function updateFromDB(id, newData) {
+  try {
+    const docRef = await doc(firestore, "entries", id);
+    await updateDoc(docRef, newData);
   } catch (err) {
     console.log(err);
   }
