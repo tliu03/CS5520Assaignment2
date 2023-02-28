@@ -18,6 +18,7 @@ export default function EntryItem({ entry }) {
           styles.entryContainer,
           pressed && styles.pressed,
         ]}
+        android_ripple={{ color: Colors.primary401, radius: 6 }}
       >
         <Text style={styles.text}>{entry.description}</Text>
         <View style={styles.calorieDisplayContainer}>

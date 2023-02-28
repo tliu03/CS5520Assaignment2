@@ -3,7 +3,7 @@ import React from "react";
 import Card from "../UI/Card";
 import { Colors } from "../../constants/color";
 import IconButton from "../UI/IconButton";
-import { updateFromDB } from "../../Firebase/firestoreHelper";
+import { updateFromDB, deleteFromDB } from "../../Firebase/firestoreHelper";
 import { useNavigation } from "@react-navigation/native";
 
 export default function EntryDetail({ entry }) {
@@ -14,6 +14,11 @@ export default function EntryDetail({ entry }) {
     // console.log(entry.reviewed);
     navigation.navigate("All Entry");
   }
+
+  function deleteHandler() {
+    deleteFromDB(entry.id);
+    navigation.navigate("All Entry");
+  }
   return (
     <Card style={styles.CardContainer}>
       <View style={styles.textContainer}>
@@ -22,13 +27,7 @@ export default function EntryDetail({ entry }) {
       </View>
       <View style={styles.buttonsContainer}>
         <Card style={styles.buttonContainer}>
-          <IconButton
-            icon="trash"
-            size={28}
-            onPress={() => {
-              console.log("delete");
-            }}
-          />
+          <IconButton icon="trash" size={28} onPress={deleteHandler} />
         </Card>
         {!entry.reviewed && entry.overLimit && (
           <Card style={styles.buttonContainer}>

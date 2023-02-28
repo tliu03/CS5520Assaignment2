@@ -24,7 +24,7 @@ export default function EntryForm({ onSubmit }) {
   function submitHandler() {
     const entryData = {
       calorie: +entry.calorie,
-      description: entry.description,
+      description: entry.description.trim(),
       overLimit: entry.calorie > 500,
       reviewed: false,
     };
