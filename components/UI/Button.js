@@ -6,8 +6,8 @@ function Button({ children, onPress, style }) {
     <View style={style}>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-        android_ripple={{ color: Colors.primary400, radius: 5 }}
+        style={({ pressed }) => [styles.button, , pressed && styles.pressed]}
+        android_ripple={{ borderless: false }}
       >
         <View>
           <Text style={styles.buttonText}>{children}</Text>

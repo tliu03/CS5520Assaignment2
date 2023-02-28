@@ -3,7 +3,7 @@ import { Colors } from "../constants/color";
 import EntriesList from "../components/EntriyDetail/EntriesList";
 
 import { firestore } from "../Firebase/firebase-setup";
-import { onSnapshot, collection, where } from "firebase/firestore";
+import { onSnapshot, collection, where, query } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 export default function OverLimitEntries() {
@@ -14,52 +14,27 @@ export default function OverLimitEntries() {
   // query with params
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
+    const q = query(
       collection(firestore, "entries"),
-      (querySnapshot) => {
-        if (querySnapshot.empty) {
-          setEntries([]);
-        } else {
-          let docs = [];
-          querySnapshot.docs.forEach((snap) => {
-            console.log("Snap: ", snap.id);
-            return docs.push({ ...snap.data(), id: snap.id });
-          });
-          //   console.log(docs);
-          setEntries(docs);
-        }
-      }
+      where("calorie", ">", 500, "&&", "reviewed", "==", false)
     );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      if (querySnapshot.empty) {
+        setEntries([]);
+      } else {
+        let docs = [];
+        querySnapshot.docs.forEach((snap) => {
+          console.log("Snap: ", snap.id);
+          return docs.push({ ...snap.data(), id: snap.id });
+        });
+        //   console.log(docs);
+        setEntries(docs);
+      }
+    });
     return () => {
       unsubscribe();
     };
   }, []);
-
-  // Filtering
-  //   useEffect(() => {
-  //     const unsubscribe = onSnapshot(
-  //       collection(firestore, "entries"),
-  //       (querySnapshot) => {
-  //         if (querySnapshot.empty) {
-  //           setEntries([]);
-  //         } else {
-  //           let docs = [];
-  //           querySnapshot.docs.forEach((snap) => {
-  //             console.log(snap.id);
-  //             return docs.push({ ...snap.data(), id: snap.id });
-  //           });
-  //           console.log(docs);
-  //           setEntries(docs);
-  //         }
-  //       }
-  //     );
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   }, []);
-  //   const OverLimitEntry = entries.filter(
-  //     (entry) => entry.calorie > 500 && !entry.reviewed
-  //   );
 
   return (
     <View style={styles.container}>
