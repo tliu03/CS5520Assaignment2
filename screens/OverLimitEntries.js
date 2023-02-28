@@ -7,7 +7,9 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 export default function OverLimitEntries() {
-  const [entries, setEntries] = useState("");
+  const [entries, setEntries] = useState([]);
+  //   You should pass a prop to communicate what
+  // type of entries (all or over-limit ones) to query from firebase.
 
   useEffect(() => {
     const unsubscribe = onSnapshot(

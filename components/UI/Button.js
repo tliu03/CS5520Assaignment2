@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   pressed: {
-    opacity: 0.75,
-    backgroundColor: Colors.secondary01,
+    opacity: 0.5,
+    backgroundColor: Colors.primary400,
     borderRadius: 4,
   },
 });

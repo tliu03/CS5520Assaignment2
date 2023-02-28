@@ -6,16 +6,22 @@ import Card from "../UI/Card";
 
 export default function EntryItem({ entry }) {
   const navigation = useNavigation();
-  
-  function EditEntryNav(){
-    navigation.navigate('EditEntry', {entry: entry})
+
+  function EditEntryNav() {
+    navigation.navigate("EditEntry", { entry: entry });
   }
   return (
-    <Pressable onPress={EditEntryNav}>
-      <Card style={styles.entryContainer}>
+    <Card style={styles.cardStyle}>
+      <Pressable
+        onPress={EditEntryNav}
+        style={({ pressed }) => [
+          styles.entryContainer,
+          pressed && styles.pressed,
+        ]}
+      >
         <Text style={styles.text}>{entry.description}</Text>
         <View style={styles.calorieDisplayContainer}>
-          {!entry.reviewed && (
+          {entry.overLimit && !entry.reviewed && (
             <Ionicons
               name="warning"
               size={18}
@@ -27,21 +33,28 @@ export default function EntryItem({ entry }) {
             <Text style={styles.numberText}>{entry.calorie}</Text>
           </Card>
         </View>
-      </Card>
-    </Pressable>
+      </Pressable>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
   entryContainer: {
     flexDirection: "row",
+    width: "90%",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginHorizontal: 20,
     marginVertical: 10,
     justifyContent: "space-between",
     alignItems: "center",
+    borderRadius: 4,
     backgroundColor: Colors.primary401,
+  },
+  pressed: {
+    opacity: 0.75,
+    backgroundColor: Colors.primary401,
+    borderRadius: 4,
   },
   IconStyle: {
     paddingHorizontal: 10,

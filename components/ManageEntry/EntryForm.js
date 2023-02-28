@@ -8,6 +8,7 @@ export default function EntryForm({ onSubmit }) {
   const [entry, setEntry] = useState({
     calorie: 0,
     description: "",
+    overLimit: true,
     reviewed: false,
   });
 
@@ -24,8 +25,9 @@ export default function EntryForm({ onSubmit }) {
     const entryData = {
       calorie: +entry.calorie,
       description: entry.description,
+      overLimit: entry.calorie > 500,
+      reviewed: false,
     };
-
     const calorieIsValid = !isNaN(entryData.calorie) && entryData.calorie > 0;
     const descriptionIsValid = entryData.description.trim().length > 0;
     if (!calorieIsValid || !descriptionIsValid) {
@@ -35,10 +37,11 @@ export default function EntryForm({ onSubmit }) {
     }
   }
 
-  function resetForm() {
+  function resetHandler() {
     setEntry({
       calorie: 0,
       description: "",
+      overLimit: true,
       reviewed: false,
     });
   }
@@ -63,7 +66,7 @@ export default function EntryForm({ onSubmit }) {
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <Button style={styles.button} onPress={resetForm}>
+        <Button style={styles.button} onPress={resetHandler}>
           Reset
         </Button>
         <Button style={styles.button} onPress={submitHandler}>

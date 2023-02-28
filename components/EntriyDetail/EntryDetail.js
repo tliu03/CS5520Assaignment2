@@ -3,8 +3,13 @@ import React from "react";
 import Card from "../UI/Card";
 import { Colors } from "../../constants/color";
 import IconButton from "../UI/IconButton";
+import { writeToDB } from "../../Firebase/firestoreHelper";
 
 export default function EntryDetail({ entry }) {
+  function reviewButtonHandler() {
+    // update data
+    console.log(entry);
+  }
   return (
     <Card style={styles.CardContainer}>
       <View style={styles.textContainer}>
@@ -21,15 +26,15 @@ export default function EntryDetail({ entry }) {
             }}
           />
         </Card>
-        <Card style={styles.buttonContainer}>
-          <IconButton
-            icon="checkmark"
-            size={28}
-            onPress={() => {
-              console.log("check");
-            }}
-          />
-        </Card>
+        {!entry.reviewed && entry.overLimit && (
+          <Card style={styles.buttonContainer}>
+            <IconButton
+              icon="checkmark"
+              size={28}
+              onPress={reviewButtonHandler}
+            />
+          </Card>
+        )}
       </View>
     </Card>
   );
